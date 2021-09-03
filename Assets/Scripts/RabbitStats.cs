@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RabbitStats : MonoBehaviour
 {
     public InputField inputName;
-    public string Name;
+    public string bunnyName;
 
     int health;
     int hunger;
@@ -23,15 +21,24 @@ public class RabbitStats : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             SetName();
-            if (Name != null) Debug.Log(Name);
+           // if (bunnyName != null) Debug.Log(bunnyName);
         }
         
     }
+    public bool IsRabbitNamed()
+    {
+        if (string.IsNullOrEmpty(inputName.text) == false)
+        {
+            return true;
+        }
+        else return false;
+    }
+
     public void SetName()
     {
-        if(string.IsNullOrEmpty(inputName.text) == false)
+        if(IsRabbitNamed())
         {
-            Name = inputName.text;
+            bunnyName = inputName.text;
         }
     }
 

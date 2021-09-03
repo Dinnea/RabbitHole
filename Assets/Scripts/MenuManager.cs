@@ -14,11 +14,11 @@ public class MenuManager : MonoBehaviour
         if (scene == 1)
         {
             rabbit = FindObjectOfType<RabbitStats>();
-            if (string.IsNullOrEmpty(rabbit.Name) == false)
+            if (string.IsNullOrEmpty(rabbit.bunnyName) == false)
             {
                 SceneManager.LoadScene(scene + 1);
             }
-            else Debug.Log("Please name your bunny!");
+            else Debug.Log("Please bunnyName your bunny!");
         }
         else SceneManager.LoadScene(scene + 1);
     }
