@@ -53,7 +53,7 @@ public class RabbitChoiceEvents : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        if (SceneManager.GetActiveScene().buildIndex != 1)
+        if (level != 1)
         {
             rabbitMovement.enabled = true;
             this.enabled = false;
