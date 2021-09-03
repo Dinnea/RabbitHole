@@ -8,9 +8,11 @@ public class RabbitChoiceEvents : MonoBehaviour
     List<Vector3> rabbitPositions;
     [SerializeField] float rotationSpeed = 10;
     public string furColour;
+    GameObject playerRabbit;
 
     private void Start()
     {
+        playerRabbit = GameObject.Find("playerRabbit");
         rabbitPositions = new List<Vector3>(); //assigns possible rabbit locations
         rabbitPositions.Add(new Vector3(0, 1, -0.75f));
         rabbitPositions.Add(new Vector3(-3, 0.75f, 1));
@@ -93,5 +95,14 @@ public class RabbitChoiceEvents : MonoBehaviour
     {
         if (rabbitChoiceIndex != 1) gameObject.SetActive(true);
         else transform.position -= new Vector3(0, 0.35f, 0);
+    }
+
+    public void FinalChoice()
+    {
+        if (rabbitChoiceIndex != 1)
+        {
+            gameObject.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 }

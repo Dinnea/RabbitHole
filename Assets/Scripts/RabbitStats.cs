@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RabbitStats : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class RabbitStats : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            SetName();
+            if (Name != null) Debug.Log(Name);
+        }
+        
+    }
     public void SetName()
     {
         if(string.IsNullOrEmpty(inputName.text) == false)
@@ -25,9 +35,5 @@ public class RabbitStats : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        SetName();
-        if (Name != null)Debug.Log(Name);
-    }
+   
 }
