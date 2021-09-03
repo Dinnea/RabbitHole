@@ -882,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9861f555344ae64d81f472038bf49f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handZoomSpeed: 1.5
 --- !u!4 &1903911136
 Transform:
   m_ObjectHideFlags: 0

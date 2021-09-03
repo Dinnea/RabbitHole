@@ -7,6 +7,8 @@ public class HandFollowMouse : MonoBehaviour
     Vector3 mouseLocation;
     float mouseZ = 5f;
 
+    [SerializeField] float handZoomSpeed = 1;
+
 
     private void Start()
    {
@@ -21,6 +23,7 @@ public class HandFollowMouse : MonoBehaviour
         
         mouseLocation = Input.mousePosition;
         mouseLocation.z = mouseZ;
+        mouseZ += Input.GetAxis("Mouse ScrollWheel") * handZoomSpeed;
 
 
 
