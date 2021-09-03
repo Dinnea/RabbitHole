@@ -21,7 +21,6 @@ public class RabbitStats : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             SetName();
-           // if (bunnyName != null) Debug.Log(bunnyName);
         }
         
     }
@@ -42,5 +41,6 @@ public class RabbitStats : MonoBehaviour
         }
     }
 
+    
    
 }

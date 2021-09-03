@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RabbitChoiceEvents : MonoBehaviour
 {
@@ -8,12 +9,13 @@ public class RabbitChoiceEvents : MonoBehaviour
     List<Vector3> rabbitPositions;
     [SerializeField] float rotationSpeed = 10;
     public string furColour;
-    GameObject playerRabbit;
     RabbitStats rabbitStats;
+    RabbitMovement rabbitMovement;
 
     private void Start()
     {
-        playerRabbit = GameObject.Find("playerRabbit");
+        rabbitMovement = GetComponent<RabbitMovement>();
+        rabbitMovement.enabled = false;
 
         rabbitPositions = new List<Vector3>(); //assigns possible rabbit locations
         rabbitPositions.Add(new Vector3(0, 1, -0.75f));
@@ -42,11 +44,19 @@ public class RabbitChoiceEvents : MonoBehaviour
 
     private void Update()
     {
-        
-
-        if (rabbitChoiceIndex == 1) //rotates the rabbit in front, the selected rabbit
+        if (rabbitChoiceIndex == 1 ) //rotates the rabbit in front, the selected rabbit
         {
             rotate();
+        }
+       
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            rabbitMovement.enabled = true;
+            this.enabled = false;
         }
     }
 
@@ -90,7 +100,7 @@ public class RabbitChoiceEvents : MonoBehaviour
         MoveRabbits();
     }
 
-    public void RabbitChosen() //rabbit selected, can bunnyName it
+    public void RabbitChosen() //rabbit selected, can name it
     {
         if (rabbitChoiceIndex != 1) gameObject.SetActive(false);
         else transform.position += new Vector3(0, 0.35f, 0);

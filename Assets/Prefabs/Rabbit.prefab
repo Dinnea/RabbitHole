@@ -105,6 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3673848892641099577}
   - component: {fileID: -2577940360621987917}
+  - component: {fileID: -7586023744077106765}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Untagged
@@ -141,3 +142,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rabbitChoiceIndex: 0
   rotationSpeed: 10
+  furColour: 
+--- !u!114 &-7586023744077106765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673848892641099578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb0250dd517fd04e88d8183c64bddb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
