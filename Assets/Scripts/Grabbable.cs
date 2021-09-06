@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Grabbable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Vector3 originalLocation;
+
+    public void ResetPosition()
     {
-        
+        transform.position = originalLocation;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
