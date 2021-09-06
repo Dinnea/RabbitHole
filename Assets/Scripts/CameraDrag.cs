@@ -2,25 +2,45 @@ using UnityEngine;
 
 public class CameraDrag : MonoBehaviour
 {
-    public float dragSpeed = 2;
-    private Vector3 dragOrigin;
+    /* V1
+     Vector3 lastDragPosition;
+     Vector3 change;
+     Vector3 target;
 
+     void LateUpdate()
+     {
+         
+         Drag();
+     }
 
-    void Update()
+     void Drag()
+     {
+        target.y = Mathf.Clamp(change.y, 0.4f, 2.2f);
+        if (Input.GetMouseButtonDown(0)) lastDragPosition = Input.mousePosition;
+
+         if (Input.GetMouseButton(0))
+         {
+             
+            change = lastDragPosition - Input.mousePosition;
+            target = transform.position += change;
+            transform.position = target;
+             //transform.Translate(change * Time.deltaTime * 0.5f);
+             lastDragPosition = Input.mousePosition;
+         }
+     }/**/
+
+    //V2 - bounds included
+    public int cameraDragSpeed = 200;
+    Vector3 boundsMax = new Vector3( 5.1f, 2.5f, -9.54f);
+    Vector3 boundsMin = new Vector3(-6.3f, -0.19f, -9.54f);
+
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, boundsMin.x, boundsMax.x), Mathf.Clamp(transform.position.y, boundsMin.y, boundsMax.y), Mathf.Clamp(transform.position.z, boundsMin.z, boundsMax.z));
+        if (Input.GetMouseButton(1))
         {
-            dragOrigin = Input.mousePosition;
-            return;
+            float speed = cameraDragSpeed * Time.deltaTime;
+            transform.position -= new Vector3(Input.GetAxis("Mouse X") * speed, Input.GetAxis("Mouse Y") * speed, 0);
         }
-
-        if (!Input.GetMouseButton(0)) return;
-
-        Vector3 pos = Camera.main.ScreenToViewportPoint(-(Input.mousePosition - dragOrigin));
-        Vector3 move = new Vector3(pos.x * dragSpeed, 0, pos.y * dragSpeed);
-
-        transform.Translate(move, Space.World);
-    }
-
-
+    }/**/
 }
