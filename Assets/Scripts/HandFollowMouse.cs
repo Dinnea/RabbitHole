@@ -14,6 +14,8 @@ public class HandFollowMouse : MonoBehaviour
     float maxZ = 9.5f;
     float damping = 7.5f;
 
+    public bool isMoving = true;
+
 
     private void Start()
    {
@@ -24,15 +26,18 @@ public class HandFollowMouse : MonoBehaviour
 
     void Update()
     {
-        oldMouseZ = mouseZ;        
+        if (isMoving) HandMove();
+    }
+
+    void HandMove()
+    {
+        oldMouseZ = mouseZ;
         mouseLocation = Input.mousePosition;
         mouseLocation.z = mouseZ;
-        
+
         mouseZ += Input.GetAxis("Mouse ScrollWheel") * handZoomSpeed;
         mouseZ = Mathf.Clamp(mouseZ, minZ, maxZ);
-        
-        transform.position = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(mouseLocation), Time.deltaTime*damping); //smooth movement
 
-
+        transform.position = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(mouseLocation), Time.deltaTime * damping); //smooth movement
     }
 }

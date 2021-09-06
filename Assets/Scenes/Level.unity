@@ -485,6 +485,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3673848891392024482, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: m_TagString
+      value: Rabbit
+      objectReference: {fileID: 0}
     - target: {fileID: 3673848892641099577, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1167,6 +1171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handZoomSpeed: 3
+  isMoving: 1
 --- !u!4 &1903911136
 Transform:
   m_ObjectHideFlags: 0

@@ -4,22 +4,37 @@ using UnityEngine;
 
 public class GrabObject : MonoBehaviour
 {
+    HandFollowMouse hand;
     public GameObject heldObject;
     [SerializeField] private Transform pickUpSlot;
     bool isHolding = false;
+    bool hit;
+    RaycastHit hitInfo = new RaycastHit();
+
+    private void Start()
+    {
+        hand = GetComponent<HandFollowMouse>();
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse is down");
+            hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
             if (!isHolding) PickUp();
-            else if (isHolding) Drop();
+            else if (isHolding && hitInfo.transform.gameObject.CompareTag("Rabbit"))
+            {
+                Debug.Log("Do an action");
+                hand.isMoving = false;
+                Invoke("Drop", 2);
+                //do an action, then drop the item
+            }
+            else Drop();
         }
     }
     void PickUp()
     {
-        RaycastHit hitInfo = new RaycastHit();
-        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+        
+        
         if (hit)
         {
             Debug.Log("Hit " + hitInfo.transform.gameObject.name);
@@ -48,6 +63,7 @@ public class GrabObject : MonoBehaviour
         heldObject.transform.SetParent(null);
         grabbable.ResetPosition();
         heldObject = null;
+        hand.isMoving = true;
         isHolding = false;
     }
 }
