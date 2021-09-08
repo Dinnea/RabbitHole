@@ -9,7 +9,7 @@ public class RabbitChoiceEvents : MonoBehaviour
     List<Vector3> rabbitPositions;
     [SerializeField] float rotationSpeed = 10;
     public string furColour;
-    RabbitStats rabbitStats;
+    RabbitChoiceInfo rabbitStats;
     RabbitMovement rabbitMovement;
 
     private void Start()
@@ -113,15 +113,13 @@ public class RabbitChoiceEvents : MonoBehaviour
 
     public void FinalChoice()
     {
-        rabbitStats = GetComponentInParent<RabbitStats>();
+        rabbitStats = FindObjectOfType<RabbitChoiceInfo>();
 
         if (rabbitStats.IsRabbitNamed())
         {
-            if (rabbitChoiceIndex != 1)
-            {
+            
                 gameObject.SetActive(true);
                 Destroy(gameObject);
-            }
         }       
     }
 }

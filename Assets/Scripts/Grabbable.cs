@@ -9,7 +9,5 @@ public class Grabbable : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = originalLocation;
-    }
-
-    
+    }    
 }

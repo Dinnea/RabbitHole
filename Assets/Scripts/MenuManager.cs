@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    RabbitStats rabbit;
+    RabbitChoiceInfo rabbit;
     public void PlayNextRoom()
     {
         int scene = SceneManager.GetActiveScene().buildIndex;
@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
 
         if (scene == 1)
         {
-            rabbit = FindObjectOfType<RabbitStats>();
+            rabbit = FindObjectOfType<RabbitChoiceInfo>();
             if (string.IsNullOrEmpty(rabbit.bunnyName) == false)
             {
                 SceneManager.LoadScene(scene + 1);

@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 453e0f0ca8e370d41b35185f61f7ba9c, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1340,8 +1340,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1527791431}
     m_Modifications:
     - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: furColour
+      value: white
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: rabbitChoiceIndex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158644819988320960, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3673848892641099577, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: m_RootOrder
@@ -1480,8 +1488,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1527791431}
     m_Modifications:
     - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: furColour
+      value: brown
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: rabbitChoiceIndex
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158644819988320960, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3673848891392024487, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2136,9 +2152,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1527791431}
   - component: {fileID: 1527791430}
+  - component: {fileID: 1527791432}
   m_Layer: 0
-  m_Name: PlayerRabbit
-  m_TagString: Untagged
+  m_Name: PlayerRabbitInfo
+  m_TagString: Rabbit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2150,12 +2167,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527791429}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a827d8e6d2dcce4aa2aa82b5e67b224, type: 3}
+  m_Script: {fileID: 11500000, guid: 1829783eca0757f458df3afe61af05ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputName: {fileID: 1405596272}
+  love: 80
+  day: 1
   bunnyName: 
 --- !u!4 &1527791431
 Transform:
@@ -2175,6 +2193,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1527791432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527791429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ade754e4953eff4eb14fc49ffeffa02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bunny: {fileID: 3673848892641099578, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+  inputName: {fileID: 1405596272}
+  bunnyName: 
 --- !u!1 &1580754378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,8 +2409,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1527791431}
     m_Modifications:
     - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: furColour
+      value: grey
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: rabbitChoiceIndex
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158644819988320960, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3673848891392024487, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2660,12 +2701,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1527791431}
     m_Modifications:
     - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: furColour
+      value: black
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: rotationSpeed
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: rabbitChoiceIndex
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158644819988320960, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3673848891392024487, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: m_Materials.Array.data[0]

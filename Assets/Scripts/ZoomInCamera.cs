@@ -39,17 +39,24 @@ public class ZoomInCamera : MonoBehaviour
     float minFOV = 25;
     float maxFOV = 60;
 
+    public bool isMoving; 
+
     private void Start()
     {
+        isMoving = true;
         mainCamera = Camera.main;
         distance = mainCamera.fieldOfView;
     }
 
     private void Update()
     {
+        if (isMoving) ZoomCamera();
+    }
+
+    private void ZoomCamera()
+    {
         distance -= Input.GetAxis("Mouse ScrollWheel") * sensitivityDistance;
         distance = Mathf.Clamp(distance, minFOV, maxFOV);                     //limit the movement to desired borders
         mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, distance, Time.deltaTime * damping);
     }
-
 }
