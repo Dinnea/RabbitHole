@@ -11,7 +11,7 @@ public class RabbitChoiceInfo : MonoBehaviour
 {
     int test = 1;
     [SerializeField] GameObject bunny;
-    MeshRenderer renderer;
+    MeshRenderer rendererBunny;
     List<Material> materials;
 
     public InputField inputName;
@@ -29,7 +29,7 @@ public class RabbitChoiceInfo : MonoBehaviour
         materials.Add((Material)Resources.Load("Black"));
 
 
-        renderer = bunny.GetComponentInChildren<MeshRenderer>();   //GetComponentInCh<MeshRenderer>();
+        rendererBunny = bunny.GetComponentInChildren<MeshRenderer>();   //GetComponentInCh<MeshRenderer>();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -50,16 +50,16 @@ public class RabbitChoiceInfo : MonoBehaviour
             switch (furColour)
             {
                 case "white":
-                    renderer.material = materials[0];
+                    rendererBunny.material = materials[0];
                     break;
                 case "brown":
-                    renderer.material = materials[1];
+                    rendererBunny.material = materials[1];
                     break;
                 case "grey":
-                    renderer.material = materials[2];
+                    rendererBunny.material = materials[2];
                     break;
                 case "black":
-                    renderer.material = materials[3];
+                    rendererBunny.material = materials[3];
                     break;
             }         
                 
