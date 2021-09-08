@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e7b8ac266dfa99546a4c9d5a0f5bd257, type: 2}
+  - {fileID: 2100000, guid: 18c42c2f579045e46af302a467d9f63b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,8 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1829783eca0757f458df3afe61af05ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputName: {fileID: 0}
-  bunnyName: bastard
-  nameText: {fileID: 0}
   love: 80
   day: 1
+  bunnyName: Unnamed

@@ -14,6 +14,7 @@ public class RabbitChoiceEvents : MonoBehaviour
 
     private void Start()
     {
+        rabbitStats = FindObjectOfType<RabbitChoiceInfo>();
         rabbitMovement = GetComponent<RabbitMovement>();
         rabbitMovement.enabled = false;
 
@@ -24,22 +25,6 @@ public class RabbitChoiceEvents : MonoBehaviour
         rabbitPositions.Add(new Vector3(3, 0.75f, 1));
 
         MoveRabbits();
-
-        switch (rabbitChoiceIndex)
-        {
-            case 1:
-                furColour = "white";
-                break;
-            case 2:
-                furColour = "brown";
-                break;
-            case 3:
-                furColour = "grey";
-                break;
-            case 4:
-                furColour = "black";
-                break;
-        }
     }
 
     private void Update()
@@ -71,6 +56,7 @@ public class RabbitChoiceEvents : MonoBehaviour
         {
             case 1:
                 transform.position = rabbitPositions[0];
+                rabbitStats.furColour = furColour;
                 break;
             case 2:
                 transform.position = rabbitPositions[1];
@@ -113,7 +99,7 @@ public class RabbitChoiceEvents : MonoBehaviour
 
     public void FinalChoice()
     {
-        rabbitStats = FindObjectOfType<RabbitChoiceInfo>();
+        
 
         if (rabbitStats.IsRabbitNamed())
         {

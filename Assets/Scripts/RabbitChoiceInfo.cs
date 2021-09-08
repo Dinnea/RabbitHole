@@ -11,13 +11,25 @@ public class RabbitChoiceInfo : MonoBehaviour
 {
     int test = 1;
     [SerializeField] GameObject bunny;
+    MeshRenderer renderer;
+    List<Material> materials;
+
     public InputField inputName;
     public string bunnyName;
+    public string furColour;
 
     
 
     void Start()
     {
+        materials = new List<Material>(4);
+        materials.Add((Material)Resources.Load("White"));
+        materials.Add((Material)Resources.Load("Brown"));
+        materials.Add((Material)Resources.Load("Grey"));
+        materials.Add((Material)Resources.Load("Black"));
+
+
+        renderer = bunny.GetComponentInChildren<MeshRenderer>();   //GetComponentInCh<MeshRenderer>();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -32,18 +44,29 @@ public class RabbitChoiceInfo : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
+
         if (level == 2)
         {
-            if (test == 1)
+            switch (furColour)
             {
+                case "white":
+                    renderer.material = materials[0];
+                    break;
+                case "brown":
+                    renderer.material = materials[1];
+                    break;
+                case "grey":
+                    renderer.material = materials[2];
+                    break;
+                case "black":
+                    renderer.material = materials[3];
+                    break;
+            }         
                 
-                Instantiate(bunny, new Vector3 (0, 0, 0 ), Quaternion.Euler(0, 0, 0)) ;
-
-            }
-
-            Destroy(gameObject);
+             Instantiate(bunny, new Vector3 (0, -1.44f, 0 ), Quaternion.identity );
         }
     }
+
 
     public bool IsRabbitNamed()
     {
