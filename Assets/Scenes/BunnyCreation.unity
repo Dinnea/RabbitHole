@@ -2211,7 +2211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bunny: {fileID: 3673848892641099578, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
   inputName: {fileID: 1405596272}
-  bunnyName: 
+  bunnyName: bunny.bunnyName
   furColour: 
 --- !u!1 &1580754378
 GameObject:

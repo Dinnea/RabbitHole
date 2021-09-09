@@ -10,6 +10,9 @@ public class Bunny : MonoBehaviour
     RabbitChoiceInfo rabbitInfo;
 
     private TextMeshProUGUI nameText;
+    private TextMeshProUGUI dayNumber;
+    private TextMeshProUGUI loveNumber;
+    private TextMeshProUGUI actionsNumber;
 
     //hardcoded
     public float love = 80;
@@ -31,8 +34,18 @@ public class Bunny : MonoBehaviour
         info = GameObject.Find("PlayerRabbitInfo");
         rabbitInfo = info.GetComponent<RabbitChoiceInfo>();
         bunnyName = rabbitInfo.bunnyName;
+
         nameText = GameObject.Find("name").GetComponent<TextMeshProUGUI>();
         nameText.text = rabbitInfo.bunnyName;
+
+        dayNumber = GameObject.Find("Day").GetComponent<TextMeshProUGUI>();
+        dayNumber.text += day;
+
+        loveNumber = GameObject.Find("Love").GetComponent<TextMeshProUGUI>();
+        loveNumber.text += love + "%";
+
+        actionsNumber = GameObject.Find("actions").GetComponent<TextMeshProUGUI>();
+        actionsNumber.text += 2 - actionsDone;
     }
     private void Update()
     {
@@ -79,8 +92,11 @@ public class Bunny : MonoBehaviour
             Debug.Log("Action done: " + action);
             love += 10;
             actionsDone++;
+            loveNumber.text = "Love: " + love + "%";
+            actionsNumber.text = "Actions left: " + (2 - actionsDone);
+
         }
-        
+
     }
     public void NextDay()
     {
@@ -98,16 +114,18 @@ public class Bunny : MonoBehaviour
                 trueLove = 70;
                 break;
             case 3:
-                trueLove = 50;
+                trueLove = 60;
                 break;
             case 4:
-                trueLove = 30;
+                trueLove = 50;
                 break;
             case 5:
-                trueLove = 0;
+                trueLove = 20;
                 break;
         }
+        dayNumber.text = "Day "+ day;
         love = trueLove;
+        loveNumber.text = "Love: " + love + "%";
     }
     // creation screen options   
     
