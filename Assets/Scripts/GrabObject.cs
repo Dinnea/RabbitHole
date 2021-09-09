@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GrabObject : MonoBehaviour
 {
@@ -16,28 +18,36 @@ public class GrabObject : MonoBehaviour
     bool hit;
     RaycastHit hitInfo = new RaycastHit();
 
+    [SerializeField] Canvas popup;
+    private PopUpTextLevel popUpText;
+
+
     private void Start()
     {
         hand = GetComponent<HandFollowMouse>();
         mainCamera = Camera.main.GetComponent<ZoomInCamera>();
         bunny = FindObjectOfType<Bunny>();
+        popUpText = popup.GetComponent<PopUpTextLevel>();
+        
     }
     private void Update()
     {
+        //if(heldObject != null) Debug.Log(heldObject.name);
         if (Input.GetMouseButtonDown(0))
         {
             hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-            bool isRabbit = hitInfo.transform.CompareTag("Rabbit");
+            bool isRabbit = false;
+            if (hitInfo.transform != null)  isRabbit = hitInfo.transform.CompareTag("Rabbit");
             if (!isHolding && !isRabbit) PickUp();
             else if (isHolding && isRabbit && !isActing) Action();
             else if (!isHolding && isRabbit && !isActing)
             {
-                bunny.TakeCare("Pet");
+                bunny.TakeCare("pet");
                 hand.isMoving = false;
                 mainCamera.isMoving = false;
-                Invoke("Drop", 2);
+                StartCoroutine(ExecuteAfterTime(2, true));
             }
-            else Drop();
+            else Drop(false);
         }
     }
     void PickUp()
@@ -53,36 +63,44 @@ public class GrabObject : MonoBehaviour
                 heldObject.transform.SetParent(pickUpSlot);
                 heldObject.transform.localPosition = Vector3.zero;
                 isHolding = true;
-                Debug.Log("Grabbed " + heldObject.name);
+                popUpText.TurnOn("Grabbed " + heldObject.name);
             }
-            else Debug.Log("Nothing to grab.");
+            else popUpText.TurnOn("Nothing to grab.");
         }
-        else Debug.Log("Nothing to grab.");
+        else popUpText.TurnOn("Nothing to grab.");
     }
 
-    void Action()
+    void Drop(bool doneAction)
     {
-        isActing = true;
-        bunny.TakeCare(heldObject.name);
-        hand.isMoving = false;
-        mainCamera.isMoving = false;
-        Invoke("Drop", 2);
-        //do an action, then drop the item
-    }
-
-    void Drop()
-    {        
         if (heldObject != null)
         {
             Grabbable grabbable = GetComponentInChildren<Grabbable>();
             heldObject.transform.SetParent(null);
             grabbable.ResetPosition();
+            if (!doneAction) popUpText.TurnOn("Dropped " + heldObject.name);
             heldObject = null;
+            
         }
-       
+
         hand.isMoving = true;
         mainCamera.isMoving = true;
         isActing = false;
         isHolding = false;
+    }
+
+    void Action()
+    {
+        bunny.TakeCare(heldObject.name);
+        isActing = true;        
+        hand.isMoving = false;
+        mainCamera.isMoving = false;
+        StartCoroutine(ExecuteAfterTime(2, true));
+        //do an action, then drop the item
+    }
+
+    IEnumerator ExecuteAfterTime(float time, bool doneAction)
+    {
+        yield return new WaitForSeconds(time);
+        Drop(doneAction);
     }
 }
