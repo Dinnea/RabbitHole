@@ -10,6 +10,8 @@ public class Bunny : MonoBehaviour
     RabbitChoiceInfo rabbitInfo;
 
     private TextMeshProUGUI nameText;
+    private TextMeshProUGUI loveText;
+
     private GameObject ui;
     private PopUpTextLevel popUp;
 
