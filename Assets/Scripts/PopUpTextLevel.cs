@@ -17,6 +17,6 @@ public class PopUpTextLevel : MonoBehaviour
         TurnOff();
         gameObject.SetActive(true);
         self.text = text;
-        Invoke("TurnOff", 3);
+        Invoke("TurnOff", 2);
     }
 }

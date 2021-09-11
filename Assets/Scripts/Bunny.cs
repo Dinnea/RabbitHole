@@ -33,7 +33,6 @@ public class Bunny : MonoBehaviour
     {
         info = GameObject.Find("PlayerRabbitInfo");
         rabbitInfo = info.GetComponent<RabbitChoiceInfo>();
-        bunnyName = rabbitInfo.bunnyName;
 
         nameText = GameObject.Find("name").GetComponent<TextMeshProUGUI>();
         nameText.text = rabbitInfo.bunnyName;
@@ -82,7 +81,7 @@ public class Bunny : MonoBehaviour
             switch (item)
             {
                 case "snack":
-                    if (!givenSnack)                    
+                    if (!givenSnack)
                     {
 
                         if (day < 3)
@@ -103,7 +102,7 @@ public class Bunny : MonoBehaviour
                         {
                             love += 0;
                             popUp.TurnOn(name + " doesn't even touch the cabbage.");
-                        }                        
+                        }
                     }
                     else popUp.TurnOn("You can't do the same action twice!");
                     break;
@@ -111,7 +110,7 @@ public class Bunny : MonoBehaviour
                 case "brush":
                     if (!beenBrushed)
                     {
-                        if(day < 3)
+                        if (day < 3)
                         {
                             popUp.TurnOn(name + " has been brushed. Such smooth fur!");
                             love += 5;
@@ -124,7 +123,7 @@ public class Bunny : MonoBehaviour
                         else popUp.TurnOn(name + " doesn't react.");
 
                         actionsDone++;
-                        beenBrushed = true;                        
+                        beenBrushed = true;
                     }
                     else popUp.TurnOn("You can't do the same action twice!");
                     break;
@@ -147,7 +146,7 @@ public class Bunny : MonoBehaviour
                         beenBathed = true;
                         actionsDone++;
                     }
-                    else popUp.TurnOn("You can't do the same action twice!");              
+                    else popUp.TurnOn("You can't do the same action twice!");
                     break;
 
                 case "medicine":
@@ -189,20 +188,17 @@ public class Bunny : MonoBehaviour
                             popUp.TurnOn("The bunny is hurt... ");
                             love -= 5;
                         }
-                        
+                        actionsDone++;
                         beenPet = true;
-                    }                   
+                    }
                     else popUp.TurnOn("You can't do the same action twice!");
                     break;
             }
-
-            Debug.Log("Action done: " + action);
-            love += 10;
-            actionsDone++;
             loveNumber.text = "Love: " + love + "%";
             actionsNumber.text = "Actions left: " + (2 - actionsDone);
 
         }
+        popUp.TurnOn("No more actions left to do today!");
 
     }
 
@@ -219,40 +215,24 @@ public class Bunny : MonoBehaviour
             givenMeds = false;
             beenPet = false;
 
-        switch (day)
-        {
-            case 2:
-                trueLove = 70;
-                break;
-            case 3:
-                trueLove = 60;
-                break;
-            case 4:
-                trueLove = 50;
-                break;
-            case 5:
-                trueLove = 20;
-                break;
+            switch (day)
+            {
+                case 2:
+                    trueLove = 70;
+                    break;
+                case 3:
+                    trueLove = 60;
+                    break;
+                case 4:
+                    trueLove = 50;
+                    break;
+                case 5:
+                    trueLove = 20;
+                    break;
+            }
+            dayNumber.text = "Day " + day;
+            love = trueLove;
+            loveNumber.text = "Love: " + love + "%";
         }
-        dayNumber.text = "Day "+ day;
-        love = trueLove;
-        loveNumber.text = "Love: " + love + "%";
-    }
-    
-    void TakeAction(string item, int day, bool actionDone, int love)
-    {
-        if (!actionDone && actionsDone < 2)
-        {
-          
-        }
-        else if (actionDone)
-        {
-
-        }
-        else if (actionsDone >= 2)
-        {
-
-        }
-        
     }
 }
