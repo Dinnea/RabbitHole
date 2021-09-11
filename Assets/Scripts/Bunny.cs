@@ -14,6 +14,7 @@ public class Bunny : MonoBehaviour
     private TextMeshProUGUI loveNumber;
     private TextMeshProUGUI actionsNumber;
     private GameObject ui;
+    private Blackout blackOut;
     private PopUpTextLevel popUp;
 
     //hardcoded
@@ -50,25 +51,17 @@ public class Bunny : MonoBehaviour
     {
         name = rabbitInfo.bunnyName;
         ui = GameObject.Find("UI");
+
         popUp = ui.GetComponentInChildren<PopUpTextLevel>();
         popUp.TurnOff();
 
+        blackOut = ui.GetComponentInChildren<Blackout>();
     }
     private void Update()
     {
-        
-
-        // Bunny care
-
-        
-    }
-
-    private void OnLevelWasLoaded(int level)
-    {
-        if (level == 1)
+        if (blackOut.isFaded)
         {
-            nameText = null;
-            popUp = null;
+           
         }
     }
 
@@ -199,7 +192,6 @@ public class Bunny : MonoBehaviour
 
         }
         else popUp.TurnOn("No more actions left to do today! Click the pet carrier now.");
-
     }
 
 
@@ -231,6 +223,7 @@ public class Bunny : MonoBehaviour
                     trueLove = 20;
                     break;
             }
+            StartCoroutine(blackOut.FadeToBlack());
             popUp.TurnOn("Day " + day);
             dayNumber.text = "Day " + day;
             love = trueLove;
