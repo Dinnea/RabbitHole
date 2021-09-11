@@ -21,7 +21,7 @@ public class Bunny : MonoBehaviour
     float trueLove = 80;
     public int day = 1;
 
-    int actionsDone = 0;
+    public int actionsDone = 0;
 
     bool givenSnack = false;
     bool beenBrushed = false;
@@ -198,7 +198,7 @@ public class Bunny : MonoBehaviour
             actionsNumber.text = "Actions left: " + (2 - actionsDone);
 
         }
-        popUp.TurnOn("No more actions left to do today!");
+        else popUp.TurnOn("No more actions left to do today! Click the pet carrier now.");
 
     }
 
@@ -208,6 +208,7 @@ public class Bunny : MonoBehaviour
     {
         if (day < 6)
         {
+            day++;
             actionsDone = 0;
             givenSnack = false;
             beenBrushed = false;
@@ -230,6 +231,7 @@ public class Bunny : MonoBehaviour
                     trueLove = 20;
                     break;
             }
+            popUp.TurnOn("Day " + day);
             dayNumber.text = "Day " + day;
             love = trueLove;
             loveNumber.text = "Love: " + love + "%";

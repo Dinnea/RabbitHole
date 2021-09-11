@@ -37,7 +37,7 @@ public class GrabObject : MonoBehaviour
         {
             hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
             bool isRabbit = false;
-            if (hitInfo.transform != null)  isRabbit = hitInfo.transform.CompareTag("Rabbit");
+            if (hitInfo.transform != null) isRabbit = hitInfo.transform.CompareTag("Rabbit");
             if (!isHolding && !isRabbit) PickUp();
             else if (isHolding && isRabbit && !isActing) Action();
             else if (!isHolding && isRabbit && !isActing)
@@ -56,6 +56,7 @@ public class GrabObject : MonoBehaviour
         
         if (hit)
         {
+            bunny = FindObjectOfType<Bunny>();
             Debug.Log("Hit " + hitInfo.transform.gameObject.name);
             if (hitInfo.transform.CompareTag("Grabbable"))
             {
@@ -64,6 +65,10 @@ public class GrabObject : MonoBehaviour
                 heldObject.transform.localPosition = Vector3.zero;
                 isHolding = true;
                 popUpText.TurnOn("Grabbed " + heldObject.name);
+            }
+            else if (hitInfo.transform.CompareTag("Carrier") && bunny.actionsDone == 2)
+            {
+                bunny.NextDay();
             }
             else popUpText.TurnOn("Nothing to grab.");
         }

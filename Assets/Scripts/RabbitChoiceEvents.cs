@@ -60,12 +60,15 @@ public class RabbitChoiceEvents : MonoBehaviour
                 break;
             case 2:
                 transform.position = rabbitPositions[1];
+                rabbitStats.furColour = furColour;
                 break;
             case 3:
                 transform.position = rabbitPositions[2];
+                rabbitStats.furColour = furColour;
                 break;
             case 4:
                 transform.position = rabbitPositions[3];
+                rabbitStats.furColour = furColour;
                 break;
         }
 

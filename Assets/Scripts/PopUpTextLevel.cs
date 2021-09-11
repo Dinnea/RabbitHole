@@ -14,9 +14,12 @@ public class PopUpTextLevel : MonoBehaviour
 
     public void TurnOn(string text)
     {
-        TurnOff();
-        gameObject.SetActive(true);
+        if (gameObject.activeInHierarchy == true)
+        {
+            TurnOff();
+        }        
         self.text = text;
-        Invoke("TurnOff", 2);
+        gameObject.SetActive(true);
+        Invoke("TurnOff", 3);
     }
 }
