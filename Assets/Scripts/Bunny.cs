@@ -59,9 +59,9 @@ public class Bunny : MonoBehaviour
     }
     private void Update()
     {
-        if (blackOut.isFaded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-           
+            StartCoroutine(blackOut.FadeToBlack(false, 0.1f));
         }
     }
 
@@ -223,11 +223,12 @@ public class Bunny : MonoBehaviour
                     trueLove = 20;
                     break;
             }
-            StartCoroutine(blackOut.FadeToBlack());
+            StartCoroutine(blackOut.FadeToBlack(true));
             popUp.TurnOn("Day " + day);
             dayNumber.text = "Day " + day;
             love = trueLove;
             loveNumber.text = "Love: " + love + "%";
+            actionsNumber.text = "Actions left: " + (2 - actionsDone);
         }
     }
 }

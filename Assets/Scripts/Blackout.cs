@@ -11,7 +11,7 @@ public class Blackout : MonoBehaviour
     Color objectColour;
     public void Awake()
     {
-        StartCoroutine(FadeToBlack(true));
+        StartCoroutine(FadeToBlack(false));
     }
 
     private void Update()
@@ -19,14 +19,19 @@ public class Blackout : MonoBehaviour
         if(objectColour.a == 1)
         {           
             isFaded = true;
+        } 
+        
+        if(objectColour.a == 0)
+        {
+            isFaded = false;
         }
     }
-    public IEnumerator FadeToBlack(bool faded = false, float fadeSpeed = 5)
+    public IEnumerator FadeToBlack(bool fade = true, float fadeSpeed = 5)
     {
         objectColour = blackOutScreen.GetComponent<Image>().color;
         float fadeAmount;
 
-        if (!faded)
+        if (fade)
         {
             while (objectColour.a < 1)
             {
