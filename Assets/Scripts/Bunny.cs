@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using System.Collections.Generic;
+using System.Linq;
 
 public class Bunny : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class Bunny : MonoBehaviour
     private bool _beenBathed = false;
     private bool _givenMeds = false;
     private bool _beenPet = false;
+
+    // sound
+    private GameObject _audioObject;
+    private List<AudioSource> _actionAudio;
 
 
     //------------------------------------------------------------
@@ -63,15 +68,23 @@ public class Bunny : MonoBehaviour
         _popUp.TurnOff();
 
         _blackOut = _ui.GetComponentInChildren<Blackout>();
+
+        _audioObject = GameObject.Find("Actions Done Sound");
+        _actionAudio = new List<AudioSource>(5);
+
+        _actionAudio = _audioObject.GetComponents<AudioSource>().ToList();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) //fade from black
+        if(day > 1)
         {
-            _blackOut.transitionText.gameObject.SetActive(false);
-            StartCoroutine(_blackOut.FadeToBlack(false, 0.1f));
-            _popUp.TurnOn("Day " + day);
-        }
+            if (Input.GetKeyDown(KeyCode.Space)) //fade from black
+            {
+                _blackOut.transitionText.gameObject.SetActive(false);
+                StartCoroutine(_blackOut.FadeToBlack(false, 0.1f));
+                _popUp.TurnOn("Day " + day);
+            }
+        }        
     }
 
     //------------------------------------------------------------------
@@ -107,6 +120,7 @@ public class Bunny : MonoBehaviour
                             love += 0;
                             _popUp.TurnOn(name + " doesn't even touch the cabbage."); //action isnt done - the rabbit didnt eat.
                         }
+                        _actionAudio[0].Play(0);
                     }
                     else _popUp.TurnOn("You can't do the same action twice!");
                     break;
@@ -125,7 +139,7 @@ public class Bunny : MonoBehaviour
                             love -= 5;
                         }
                         else _popUp.TurnOn(name + " doesn't react.");
-
+                        _actionAudio[1].Play(0);
                         actionsDone++; //action is done in all cases
                         _beenBrushed = true;
                     }
@@ -147,6 +161,7 @@ public class Bunny : MonoBehaviour
                         }
                         else _popUp.TurnOn(name + " doesn't react.");
 
+                        _actionAudio[2].Play(0);
                         _beenBathed = true;//action is done in all cases
                         actionsDone++;
                     }
@@ -168,6 +183,7 @@ public class Bunny : MonoBehaviour
                         }
                         else _popUp.TurnOn(name + " doesn't react.");
 
+                        _actionAudio[3].Play(0);
                         _givenMeds = true;//action is done in all cases
                         actionsDone++;
                     }
@@ -192,6 +208,7 @@ public class Bunny : MonoBehaviour
                             _popUp.TurnOn("The bunny is hurt... ");
                             love -= 5;
                         }
+                        _actionAudio[4].Play(0);
                         actionsDone++;//action is done in all cases
                         _beenPet = true;
                     }
