@@ -34,9 +34,14 @@ public class Bunny : MonoBehaviour
     private bool _givenMeds = false;
     private bool _beenPet = false;
 
-    // sound
-    private GameObject _audioObject;
+    //---------------------------- Sound ----------------------------//
+    //Sound on action
+    private GameObject _audioActionObject;
     private List<AudioSource> _actionAudio;
+
+    //Sound on day transition
+    private GameObject _audioTransitionObject;
+    private List<AudioSource> _transitionAudio;
 
 
     //------------------------------------------------------------
@@ -69,10 +74,14 @@ public class Bunny : MonoBehaviour
 
         _blackOut = _ui.GetComponentInChildren<Blackout>();
 
-        _audioObject = GameObject.Find("Actions Done Sound");
+        _audioActionObject = GameObject.Find("Actions Done Sound");
         _actionAudio = new List<AudioSource>(5);
+        _actionAudio = _audioActionObject.GetComponents<AudioSource>().ToList();
 
-        _actionAudio = _audioObject.GetComponents<AudioSource>().ToList();
+        _audioTransitionObject = GameObject.Find("Day Transition Sound");
+        _transitionAudio = new List<AudioSource>(4);
+        _transitionAudio = _audioTransitionObject.GetComponents<AudioSource>().ToList();
+
     }
     private void Update()
     {
@@ -81,6 +90,7 @@ public class Bunny : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)) //fade from black
             {
                 _blackOut.transitionText.gameObject.SetActive(false);
+                _transitionAudio[day - 2].Play(0);
                 StartCoroutine(_blackOut.FadeToBlack(false, 0.1f));
                 _popUp.TurnOn("Day " + day);
             }

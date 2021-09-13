@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     //              Menu Options
     //-------------------------------------------------
 {
-    private RabbitChoiceInfo _rabbit;
+    [SerializeField] private RabbitChoiceInfo _rabbit;
 
     // Next screen
     public void PlayNextRoom()
