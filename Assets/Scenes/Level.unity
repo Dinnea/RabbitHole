@@ -284,8 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fcabbe08c5654a47b133d055ddc557f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueText: {fileID: 0}
-  _canvas: {fileID: 0}
+  _dialogueText: {fileID: 499024939}
+  _canvas: {fileID: 83141345}
 --- !u!1001 &125902239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1444,7 +1444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackOutScreen: {fileID: 1171828612}
   isFaded: 0
-  transitionText: {fileID: 0}
+  transitionText: {fileID: 1194777103}
 --- !u!114 &1171828615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2785,8 +2785,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bunny: {fileID: 0}
   heldObject: {fileID: 0}
-  _pickUpSlot: {fileID: 0}
-  _popup: {fileID: 0}
+  _pickUpSlot: {fileID: 1123632596}
+  _popup: {fileID: 1385843988}
 --- !u!135 &1903911138
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -221,8 +221,8 @@ public class Bunny : MonoBehaviour
             _givenMeds = false;
             _beenPet = false;
 
-            switch (day)
-            {
+            switch (day) //set the real love value daily
+            {            // player has 0 real impact on bunny's condition.
                 case 2:
                     _trueLove = 70;
                     break;

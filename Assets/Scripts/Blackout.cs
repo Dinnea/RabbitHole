@@ -17,7 +17,6 @@ public class Blackout : MonoBehaviour
     public void Awake() //fade from black when entering scene for the first time
     {
         StartCoroutine(FadeToBlack(false));
-        transitionText = GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
