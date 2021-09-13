@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2705ce103cb9b484c96935760aaaf7d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rabbitChoiceIndex: 0
-  rotationSpeed: 10
+  _rabbitChoiceIndex: 0
+  _rotationSpeed: 10
   furColour: 
 --- !u!114 &-7586023744077106765
 MonoBehaviour:

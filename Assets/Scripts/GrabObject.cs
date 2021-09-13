@@ -6,104 +6,109 @@ using TMPro;
 
 public class GrabObject : MonoBehaviour
 {
-    HandFollowMouse hand;
-    ZoomInCamera mainCamera;
+    //-----------------------------------------------------
+    //                   Variables
+    //-----------------------------------------------------
+    private HandFollowMouse _hand;
+    private ZoomInCamera _mainCamera;
     public Bunny bunny;
 
 
-    public GameObject heldObject;
-    [SerializeField] private Transform pickUpSlot;
-    bool isHolding = false;
-    bool isActing = false;
-    bool hit;
-    RaycastHit hitInfo = new RaycastHit();
+    public GameObject heldObject; //what is being held
+    [SerializeField] private Transform _pickUpSlot; //where its being held
+    private bool _isHolding = false;
+    private bool _isActing = false;
+    private bool _hit;
+    private RaycastHit _hitInfo = new RaycastHit();
 
-    [SerializeField] Canvas popup;
-    private PopUpTextLevel popUpText;
+    [SerializeField] Canvas _popup;
+    private PopUpTextLevel _popUpText;
 
 
     private void Start()
     {
-        hand = GetComponent<HandFollowMouse>();
-        mainCamera = Camera.main.GetComponent<ZoomInCamera>();
+        _hand = GetComponent<HandFollowMouse>();
+        _mainCamera = Camera.main.GetComponent<ZoomInCamera>();
         bunny = FindObjectOfType<Bunny>();
-        popUpText = popup.GetComponent<PopUpTextLevel>();
+        _popUpText = _popup.GetComponent<PopUpTextLevel>();
         
     }
     private void Update()
     {
-        //if(heldObject != null) Debug.Log(heldObject.name);
+       
         if (Input.GetMouseButtonDown(0))
         {
-            hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+            _hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _hitInfo);
             bool isRabbit = false;
-            if (hitInfo.transform != null) isRabbit = hitInfo.transform.CompareTag("Rabbit");
-            if (!isHolding && !isRabbit) PickUp();
-            else if (isHolding && isRabbit && !isActing) Action();
-            else if (!isHolding && isRabbit && !isActing)
+            if (_hitInfo.transform != null) isRabbit = _hitInfo.transform.CompareTag("Rabbit"); //is this a rabbit?
+            if (!_isHolding && !isRabbit) PickUp(); //If I am not holding anything and this is not a rabbit... Pick up
+            else if (_isHolding && isRabbit && !_isActing) Act(); //if I am holding somehting and there is a rabbit, but I am not yet acting... Act.
+            else if (!_isHolding && isRabbit && !_isActing) //if I am not holding anything and, there is a rabbit and am not yet acting... Pet the rabbit!
             {
+                //Pet
                 bunny.TakeCare("pet");
-                hand.isMoving = false;
-                mainCamera.isMoving = false;
-                StartCoroutine(ExecuteAfterTime(2, true));
+                _hand.isMoving = false;
+                _mainCamera.isMoving = false;
+                StartCoroutine(DropAfterTime(2, true));
             }
             else Drop(false);
         }
     }
+    //-------------------------------------------------------------
+    //                    Hand Actions
+    //---------------------------------------------------------------
     void PickUp()
     {
         
         
-        if (hit)
+        if (_hit)
         {
             bunny = FindObjectOfType<Bunny>();
-            Debug.Log("Hit " + hitInfo.transform.gameObject.name);
-            if (hitInfo.transform.CompareTag("Grabbable"))
+            Debug.Log("Hit " + _hitInfo.transform.gameObject.name);
+            if (_hitInfo.transform.CompareTag("Grabbable")) //Can you pick up the object?
             {
-                heldObject = hitInfo.collider.gameObject;
-                heldObject.transform.SetParent(pickUpSlot);
-                heldObject.transform.localPosition = Vector3.zero;
-                isHolding = true;
-                popUpText.TurnOn("Grabbed " + heldObject.name);
+                heldObject = _hitInfo.collider.gameObject; //object being picked up
+                heldObject.transform.SetParent(_pickUpSlot); //placed in pick up slot
+                heldObject.transform.localPosition = Vector3.zero; //located at pick up slot
+                _isHolding = true;
+                _popUpText.TurnOn("Grabbed " + heldObject.name);
             }
-            else if (hitInfo.transform.CompareTag("Carrier") && bunny.actionsDone == 2)
+            else if (_hitInfo.transform.CompareTag("Carrier") && bunny.actionsDone == 2) //transition next day 
             {
                 bunny.NextDay();
             }
-            else popUpText.TurnOn("Nothing to grab.");
+            else _popUpText.TurnOn("Nothing to grab.");
         }
-        else popUpText.TurnOn("Nothing to grab.");
+        else _popUpText.TurnOn("Nothing to grab.");
     }
 
-    void Drop(bool doneAction)
+    void Drop(bool doneAction) 
     {
-        if (heldObject != null)
+        if (heldObject != null) //prevent null exceptions
         {
-            Grabbable grabbable = GetComponentInChildren<Grabbable>();
-            heldObject.transform.SetParent(null);
-            grabbable.ResetPosition();
-            if (!doneAction) popUpText.TurnOn("Dropped " + heldObject.name);
-            heldObject = null;
-            
+            Grabbable grabbable = GetComponentInChildren<Grabbable>(); //what am i holding?
+            heldObject.transform.SetParent(null); //no longer held!
+            grabbable.ResetPosition(); //placed at its original place 
+            if (!doneAction) _popUpText.TurnOn("Dropped " + heldObject.name); //if dropped when NOT acting, show popup (else Bunny.cs shows popups)
+            heldObject = null; //nothing is held        
         }
 
-        hand.isMoving = true;
-        mainCamera.isMoving = true;
-        isActing = false;
-        isHolding = false;
+        _hand.isMoving = true; //unfreeze the hand movement
+        _mainCamera.isMoving = true; //unfreeze the camera
+        _isActing = false; //isnt acting anymore
+        _isHolding = false; // isnt holding anymore
     }
 
-    void Action()
+    void Act() //Do something with the object
     {
-        bunny.TakeCare(heldObject.name);
-        isActing = true;        
-        hand.isMoving = false;
-        mainCamera.isMoving = false;
-        StartCoroutine(ExecuteAfterTime(2, true));
-        //do an action, then drop the item
+        bunny.TakeCare(heldObject.name); //take care of the rabbit with the object held
+        _isActing = true;        
+        _hand.isMoving = false; //freeze hand
+        _mainCamera.isMoving = false; //freeze camera
+        StartCoroutine(DropAfterTime(2, true)); //do an action, then drop the item
     }
 
-    IEnumerator ExecuteAfterTime(float time, bool doneAction)
+    IEnumerator DropAfterTime(float time, bool doneAction)
     {
         yield return new WaitForSeconds(time);
         Drop(doneAction);

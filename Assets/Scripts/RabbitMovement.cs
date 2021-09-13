@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class RabbitMovement : MonoBehaviour
 {
+    //How the rabbit moves
+    //I intended that the rabbit would move in game a bit,
+    //But this is most likely not going to happen.
+    //This only places the rabbit in correct area and makes sure rabbit is not rotated
 
     private void OnLevelWasLoaded(int level)
     {

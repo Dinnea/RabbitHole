@@ -4,25 +4,31 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
+
+    //------------------------------------------------
+    //              Menu Options
+    //-------------------------------------------------
 {
-    RabbitChoiceInfo rabbit;
+    private RabbitChoiceInfo _rabbit;
+
+    // Next screen
     public void PlayNextRoom()
     {
-        int scene = SceneManager.GetActiveScene().buildIndex;
+        int scene = SceneManager.GetActiveScene().buildIndex; //what is the current screen
         
 
-        if (scene == 1)
+        if (scene == 1) 
         {
-            rabbit = FindObjectOfType<RabbitChoiceInfo>();
-            if (string.IsNullOrEmpty(rabbit.bunnyName) == false)
+            _rabbit = FindObjectOfType<RabbitChoiceInfo>();
+            if (string.IsNullOrEmpty(_rabbit.bunnyName) == false) //is rabbit named?
             {
-                SceneManager.LoadScene(scene + 1);
+                SceneManager.LoadScene(scene + 1); //you can move on
             }
-            else Debug.Log("Please bunnyName your bunny!");
+            else Debug.Log("Please name your bunny!"); // add popup
         }
-        else SceneManager.LoadScene(scene + 1);
+        else SceneManager.LoadScene(scene + 1); //if not scene with rabbit to be named, just move on
     }
-
+ 
     public void QuitGame()
     {
         Application.Quit();

@@ -1470,6 +1470,10 @@ PrefabInstance:
       propertyPath: rabbitChoiceIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: _rabbitChoiceIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3158644819988320960, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1621,6 +1625,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: rabbitChoiceIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: _rabbitChoiceIndex
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3158644819988320960, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
@@ -2318,7 +2326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ade754e4953eff4eb14fc49ffeffa02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bunny: {fileID: 3673848892641099578, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+  _bunny: {fileID: 3673848892641099578, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
   inputName: {fileID: 1405596272}
   bunnyName: bunny.bunnyName
   furColour: 
@@ -2528,6 +2536,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: rabbitChoiceIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: _rabbitChoiceIndex
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3158644819988320960, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
@@ -2825,6 +2837,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
       propertyPath: rabbitChoiceIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577940360621987917, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+      propertyPath: _rabbitChoiceIndex
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3158644819988320960, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}

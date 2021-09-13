@@ -7,38 +7,49 @@ using UnityEngine.SceneManagement;
 
 public class TextBox : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI dialogueText = null;
-    [SerializeField] private Canvas canvas = null;
-    List<string> day1Script;
-    int messagesRead = 0;
+    //------------------------------------------------------------
+    //                  Variables
+    //------------------------------------------------------------
+    [SerializeField] private TextMeshProUGUI _dialogueText = null;
+    [SerializeField] private Canvas _canvas = null;
+    private List<string> _tutorialmessages;
+    int _messagesRead = 0;
     Bunny bunny;
+
+    //------------------------------------------------------------
+    //               Show messages
+    //------------------------------------------------------------
     private void Update()
     {
 
-        if (bunny == null)
+        if (bunny == null) //execute only if bunny has not been found yet!
         {
-
             bunny = FindObjectOfType<Bunny>();
-            day1Script = new List<string>();
-            day1Script.Add("Thank you for agreeing to help take care of " + bunny.gameObject.name + "! (press space for next dialogue)");
-            day1Script.Add("In order to be the best friend of " + bunny.gameObject.name + ", first you need to learn the controls.");
-            day1Script.Add("Use the mousewheel to zoom in and out.");
-            day1Script.Add("Press the right mouse button and move the mouse around to look around.");
-            day1Script.Add("Each day, you can perform 2 actions to fill your bunny's love meter and make it happy!");
-            day1Script.Add("You can brush it, give it a snack, bathe it, pet it, or if it's sick or hurt, give it medicine!");
-            day1Script.Add("To pick up an item, move your hand over it (using your mouse) and press the left button.");
-            day1Script.Add("Bring the item to " + bunny.gameObject.name + " and press the left mouse button to use it on " + bunny.gameObject.name + ".");
-            day1Script.Add("If you change your mind, you can drop the item by pressing the left button again away from the bunny!");
-            day1Script.Add("If you move your hand to the bunny without picking up anything, you can pet it!");
-            day1Script.Add("Ok, that's it for now! Have fun ;)");
+            _tutorialmessages = new List<string>(11);
+            _tutorialmessages.Add("Thank you for agreeing to help take care of " + bunny.gameObject.name + "! (press space for next dialogue)");
+            _tutorialmessages.Add("In order to be the best friend of " + bunny.gameObject.name + ", first you need to learn the controls.");
+            _tutorialmessages.Add("Use the mousewheel to zoom in and out.");
+            _tutorialmessages.Add("Press the right mouse button and move the mouse around to look around.");
+            _tutorialmessages.Add("Each day, you can perform 2 actions to fill your bunny's love meter and make it happy!");
+            _tutorialmessages.Add("You can brush it, give it a snack, bathe it, pet it, or if it's sick or hurt, give it medicine!");
+            _tutorialmessages.Add("To pick up an item, move your hand over it (using your mouse) and press the left button.");
+            _tutorialmessages.Add("Bring the item to " + bunny.gameObject.name + " and press the left mouse button to use it on " + bunny.gameObject.name + ".");
+            _tutorialmessages.Add("If you change your mind, you can drop the item by pressing the left button again away from the bunny!");
+            _tutorialmessages.Add("If you move your hand to the bunny without picking up anything, you can pet it!");
+            _tutorialmessages.Add("Ok, that's it for now! Have fun ;)");
 
-            dialogueText.text = day1Script[messagesRead];
+            _dialogueText.text = _tutorialmessages[_messagesRead]; //play message based on index
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (messagesRead < day1Script.Count) messagesRead++;
-            if (messagesRead < day1Script.Count) dialogueText.text = day1Script[messagesRead];
-            else canvas.gameObject.SetActive(false);
+            NextMessage();
         }
+    }
+
+    private void NextMessage()
+    {
+        if (_messagesRead < _tutorialmessages.Count) _messagesRead++;
+        if (_messagesRead < _tutorialmessages.Count) _dialogueText.text = _tutorialmessages[_messagesRead]; //show the right message
+        else _canvas.gameObject.SetActive(false); //if all messages read, turn off the box.
     }
 }

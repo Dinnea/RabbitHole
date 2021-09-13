@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class HandFollowMouse : MonoBehaviour
 {
-    Vector3 mouseLocation;
-    float mouseZ = 5f;
-    float oldMouseZ;
+    //------------------------------------------------------
+    //                      Hand movement
+    //------------------------------------------------------
+    private Vector3 _mouseLocation;
+    private float _mouseZ = 5f; //z default
 
-    [SerializeField] float handZoomSpeed = 1;
+    [SerializeField] float _handZoomSpeed = 1;
 
-    float minZ = 3.5f;
-    float maxZ = 9.5f;
-    float damping = 7.5f;
+    private float _minZ = 3.5f;
+    private float _maxZ = 9.5f;
+    private float _damping = 7.5f;
 
     public bool isMoving = true;
 
 
     private void Start()
-   {
-        
-        mouseLocation= Input.mousePosition;       
+   {       
+        _mouseLocation= Input.mousePosition;       
         Cursor.visible = false; 
    }
 
@@ -31,13 +32,13 @@ public class HandFollowMouse : MonoBehaviour
 
     void HandMove()
     {
-        oldMouseZ = mouseZ;
-        mouseLocation = Input.mousePosition;
-        mouseLocation.z = mouseZ;
+        _mouseLocation = Input.mousePosition;
+        _mouseLocation.z = _mouseZ; //only x + y are dictated by mouse position (up - down, left - right)
 
-        mouseZ += Input.GetAxis("Mouse ScrollWheel") * handZoomSpeed;
-        mouseZ = Mathf.Clamp(mouseZ, minZ, maxZ);
+        _mouseZ += Input.GetAxis("Mouse ScrollWheel") * _handZoomSpeed; //z (depth) is dictated by mouse scroll
+        _mouseZ = Mathf.Clamp(_mouseZ, _minZ, _maxZ); //dont move out of range! (depth)
 
-        transform.position = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(mouseLocation), Time.deltaTime * damping); //smooth movement
+        transform.position = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(_mouseLocation), Time.deltaTime * _damping); //smooth movement
+                                                               //Hand moves based on camera perspective (if it was angled, z value would change to keep hand at the same depth from camera)
     }
 }

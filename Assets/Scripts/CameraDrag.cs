@@ -29,18 +29,25 @@ public class CameraDrag : MonoBehaviour
          }
      }/**/
 
-    //V2 - bounds included
+    //-----------------------------------------------------------------------
+    //                         V2, bounds included
+    //------------------------------------------------------------------------
+
     public int cameraDragSpeed = 200;
     Vector3 boundsMax = new Vector3( 5.1f, 2.5f, -9.54f);
     Vector3 boundsMin = new Vector3(-6.3f, -0.19f, -9.54f);
 
     private void Update()
     {
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, boundsMin.x, boundsMax.x), Mathf.Clamp(transform.position.y, boundsMin.y, boundsMax.y), Mathf.Clamp(transform.position.z, boundsMin.z, boundsMax.z));
-        if (Input.GetMouseButton(1))
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, boundsMin.x, boundsMax.x), 
+                                         Mathf.Clamp(transform.position.y, boundsMin.y, boundsMax.y), 
+                                         Mathf.Clamp(transform.position.z, boundsMin.z, boundsMax.z)); //limit the movement of the camera to not go outside the room
+        if (Input.GetMouseButton(1)) //press right button to drag the camera
         {
             float speed = cameraDragSpeed * Time.deltaTime;
             transform.position -= new Vector3(Input.GetAxis("Mouse X") * speed, Input.GetAxis("Mouse Y") * speed, 0);
         }
-    }/**/
+    }
+    
+    /**/
 }

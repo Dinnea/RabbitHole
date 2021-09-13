@@ -30,33 +30,35 @@ public class ZoomInCamera : MonoBehaviour
           }
       }*/
 
-    //V2 - smootth (LERP) camera movement
-    private Camera mainCamera;
-    float distance = 50;
-    float sensitivityDistance = 10;
-    float damping = 5;
+    //---------------------------------------------------------------------
+    //              V2 - Smooth Camera Zoom (using LERP)
+    //---------------------------------------------------------------------
+    private Camera _mainCamera;
+    private float _distance = 50;
+    private float _sensitivityDistance = 10;
+    private float _damping = 5;
 
-    float minFOV = 25;
-    float maxFOV = 60;
+    private float _minFOV = 25;
+    private float _maxFOV = 60;
 
     public bool isMoving; 
 
     private void Start()
     {
         isMoving = true;
-        mainCamera = Camera.main;
-        distance = mainCamera.fieldOfView;
+        _mainCamera = Camera.main;
+        _distance = _mainCamera.fieldOfView;
     }
 
     private void Update()
     {
-        if (isMoving) ZoomCamera();
+        if (isMoving) ZoomCamera(); //only execute if isnt frozen
     }
 
     private void ZoomCamera()
     {
-        distance -= Input.GetAxis("Mouse ScrollWheel") * sensitivityDistance;
-        distance = Mathf.Clamp(distance, minFOV, maxFOV);                     //limit the movement to desired borders
-        mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, distance, Time.deltaTime * damping);
+        _distance -= Input.GetAxis("Mouse ScrollWheel") * _sensitivityDistance;
+        _distance = Mathf.Clamp(_distance, _minFOV, _maxFOV);                     //limit the movement to desired borders
+        _mainCamera.fieldOfView = Mathf.Lerp(_mainCamera.fieldOfView, _distance, Time.deltaTime * _damping); //smooth zoom
     }
 }

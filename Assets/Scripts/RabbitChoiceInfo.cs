@@ -9,65 +9,67 @@ using UnityEngine.SceneManagement;
 
 public class RabbitChoiceInfo : MonoBehaviour
 {
-    int test = 1;
-    [SerializeField] GameObject bunny;
-    MeshRenderer rendererBunny;
-    List<Material> materials;
+    [SerializeField] GameObject _bunny;
+    private MeshRenderer _rendererBunny;
+    private List<Material> _materials;
 
     public InputField inputName;
     public string bunnyName;
-    public string furColour;
-
-    
+    public string furColour;    
 
     void Start()
     {
-        materials = new List<Material>(4);
-        materials.Add((Material)Resources.Load("White"));
-        materials.Add((Material)Resources.Load("Brown"));
-        materials.Add((Material)Resources.Load("Grey"));
-        materials.Add((Material)Resources.Load("Black"));
+        //possible rabbit coats
+        _materials = new List<Material>(4);
+        _materials.Add((Material)Resources.Load("White"));
+        _materials.Add((Material)Resources.Load("Brown"));
+        _materials.Add((Material)Resources.Load("Grey"));
+        _materials.Add((Material)Resources.Load("Black"));
 
 
-        rendererBunny = bunny.GetComponentInChildren<MeshRenderer>();   //GetComponentInCh<MeshRenderer>();
-        DontDestroyOnLoad(gameObject);
+        _rendererBunny = _bunny.GetComponentInChildren<MeshRenderer>(); //object to change rabbit coat
+        DontDestroyOnLoad(gameObject); //keep this on load
     }
 
     void Update()
     {
-        // Character creation
+        // Stuff only done in character creation
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             SetName();
         }
     }
-
+    //------------------------------------------------
+    //                Customisation
+    //------------------------------------------------
     private void OnLevelWasLoaded(int level)
     {
-
+        //if level = 2 spawn new rabbit (with specific fur colour)
         if (level == 2)
         {
             switch (furColour)
             {
                 case "white":
-                    rendererBunny.material = materials[0];
+                    _rendererBunny.material = _materials[0];
                     break;
                 case "brown":
-                    rendererBunny.material = materials[1];
+                    _rendererBunny.material = _materials[1];
                     break;
                 case "grey":
-                    rendererBunny.material = materials[2];
+                    _rendererBunny.material = _materials[2];
                     break;
                 case "black":
-                    rendererBunny.material = materials[3];
+                    _rendererBunny.material = _materials[3];
                     break;
             }         
                 
-             Instantiate(bunny, new Vector3 (0, -1.44f, 0 ), Quaternion.identity );
+             Instantiate(_bunny, new Vector3 (0, -1.44f, 0 ), Quaternion.identity );
         }
     }
 
-
+    //------------------------------------------------
+    //                Naming
+    //------------------------------------------------
     public bool IsRabbitNamed()
     {
         if (string.IsNullOrEmpty(inputName.text) == false)

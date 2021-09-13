@@ -6,229 +6,243 @@ using UnityEngine.SceneManagement;
 
 public class Bunny : MonoBehaviour
 {
-    GameObject info;
-    RabbitChoiceInfo rabbitInfo;
+    //----------------------------------------------------
+    //                   Variables
+    //----------------------------------------------------
+    private GameObject _info;
+    private RabbitChoiceInfo _rabbitInfo;
 
-    private TextMeshProUGUI nameText;
-    private TextMeshProUGUI dayNumber;
-    private TextMeshProUGUI loveNumber;
-    private TextMeshProUGUI actionsNumber;
-    private GameObject ui;
-    private Blackout blackOut;
-    private PopUpTextLevel popUp;
+    //UI interaction objects
+    private TextMeshProUGUI _nameText;
+    private TextMeshProUGUI _dayNumber;
+    private TextMeshProUGUI _loveNumber;
+    private TextMeshProUGUI _actionsNumber;
+    private GameObject _ui;
+    private Blackout _blackOut;
+    private PopUpTextLevel _popUp;
 
-    //hardcoded
-    public float love = 80;
-    float trueLove = 80;
-    public int day = 1;
+    public float love = 80; //player sees this change
+    private float _trueLove = 80; //true love is true value applied in background
+    public int day = 1; //what day is it?
 
+    //Variables for checking if daily actions have been completed
     public int actionsDone = 0;
+    private bool _givenSnack = false;
+    private bool _beenBrushed = false;
+    private bool _beenBathed = false;
+    private bool _givenMeds = false;
+    private bool _beenPet = false;
 
-    bool givenSnack = false;
-    bool beenBrushed = false;
-    bool beenBathed = false;
-    bool givenMeds = false;
-    bool beenPet = false;
 
+    //------------------------------------------------------------
+    //                     Gathering UI elements etc
+    //--------------------------------------------------------
     private void Awake()
     {
-        info = GameObject.Find("PlayerRabbitInfo");
-        rabbitInfo = info.GetComponent<RabbitChoiceInfo>();
+        _info = GameObject.Find("PlayerRabbitInfo");
+        _rabbitInfo = _info.GetComponent<RabbitChoiceInfo>();
 
-        nameText = GameObject.Find("name").GetComponent<TextMeshProUGUI>();
-        nameText.text = rabbitInfo.bunnyName;
+        _nameText = GameObject.Find("name").GetComponent<TextMeshProUGUI>();
+        _nameText.text = _rabbitInfo.bunnyName;
 
-        dayNumber = GameObject.Find("Day").GetComponent<TextMeshProUGUI>();
-        dayNumber.text += day;
+        _dayNumber = GameObject.Find("Day").GetComponent<TextMeshProUGUI>();
+        _dayNumber.text += day;
 
-        loveNumber = GameObject.Find("Love").GetComponent<TextMeshProUGUI>();
-        loveNumber.text += love + "%";
+        _loveNumber = GameObject.Find("Love").GetComponent<TextMeshProUGUI>();
+        _loveNumber.text += love + "%";
 
-        actionsNumber = GameObject.Find("actions").GetComponent<TextMeshProUGUI>();
-        actionsNumber.text += 2 - actionsDone;
+        _actionsNumber = GameObject.Find("actions").GetComponent<TextMeshProUGUI>();
+        _actionsNumber.text += 2 - actionsDone;
     }
     private void Start()
     {
-        name = rabbitInfo.bunnyName;
-        ui = GameObject.Find("UI");
+        name = _rabbitInfo.bunnyName;  //rename object according to its name
+        _ui = GameObject.Find("UI");
 
-        popUp = ui.GetComponentInChildren<PopUpTextLevel>();
-        popUp.TurnOff();
+        _popUp = _ui.GetComponentInChildren<PopUpTextLevel>();
+        _popUp.TurnOff();
 
-        blackOut = ui.GetComponentInChildren<Blackout>();
+        _blackOut = _ui.GetComponentInChildren<Blackout>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) //fade from black
         {
-            StartCoroutine(blackOut.FadeToBlack(false, 0.1f));
+            _blackOut.transitionText.gameObject.SetActive(false);
+            StartCoroutine(_blackOut.FadeToBlack(false, 0.1f));
+            _popUp.TurnOn("Day " + day);
         }
     }
 
-    //Bunny care
+    //------------------------------------------------------------------
+    //                        Bunny care
+    //------------------------------------------------------------------
 
-    public void TakeCare(string item)//, int day)
+    public void TakeCare(string item) //item = what is being used
     {
-        if (actionsDone < 2)
+        if (actionsDone < 2) // can you still do an action?
         {
             switch (item)
             {
                 case "snack":
-                    if (!givenSnack)
+                    if (!_givenSnack)
                     {
 
-                        if (day < 3)
+                        if (day < 3) //values change based on day
                         {
-                            popUp.TurnOn(name + " enjoyed a piece of cabbage!");
+                            _popUp.TurnOn(name + " enjoyed a piece of cabbage!");
                             love += 10;
-                            givenSnack = true;
+                            _givenSnack = true;
                             actionsDone++;
                         }
                         else if (day < 5)
                         {
-                            popUp.TurnOn(name + " ate some cabbage.");
+                            _popUp.TurnOn(name + " ate some cabbage.");
                             love += 5;
-                            givenSnack = true;
+                            _givenSnack = true;
                             actionsDone++;
                         }
                         else
                         {
                             love += 0;
-                            popUp.TurnOn(name + " doesn't even touch the cabbage.");
+                            _popUp.TurnOn(name + " doesn't even touch the cabbage."); //action isnt done - the rabbit didnt eat.
                         }
                     }
-                    else popUp.TurnOn("You can't do the same action twice!");
+                    else _popUp.TurnOn("You can't do the same action twice!");
                     break;
 
                 case "brush":
-                    if (!beenBrushed)
+                    if (!_beenBrushed)
                     {
                         if (day < 3)
                         {
-                            popUp.TurnOn(name + " has been brushed. Such smooth fur!");
+                            _popUp.TurnOn(name + " has been brushed. Such smooth fur!");
                             love += 5;
                         }
                         else if (day < 5)
                         {
-                            popUp.TurnOn("Because of the rash, brushing the fur hurt  " + name + "! :( ");
+                            _popUp.TurnOn("Because of the rash, brushing the fur hurt  " + name + "! :( ");
                             love -= 5;
                         }
-                        else popUp.TurnOn(name + " doesn't react.");
+                        else _popUp.TurnOn(name + " doesn't react.");
 
-                        actionsDone++;
-                        beenBrushed = true;
+                        actionsDone++; //action is done in all cases
+                        _beenBrushed = true;
                     }
-                    else popUp.TurnOn("You can't do the same action twice!");
+                    else _popUp.TurnOn("You can't do the same action twice!");
                     break;
 
                 case "soap":
-                    if (!beenBathed)
+                    if (!_beenBathed)
                     {
                         if (day < 3)
                         {
                             love += 5;
-                            popUp.TurnOn(name + " is clean now!");
+                            _popUp.TurnOn(name + " is clean now!");
                         }
                         else if (day < 5)
                         {
                             love -= 5;
-                            popUp.TurnOn("The soap seems to have irritated the rash more...");
+                            _popUp.TurnOn("The soap seems to have irritated the rash more...");
                         }
-                        else popUp.TurnOn(name + " doesn't react.");
+                        else _popUp.TurnOn(name + " doesn't react.");
 
-                        beenBathed = true;
+                        _beenBathed = true;//action is done in all cases
                         actionsDone++;
                     }
-                    else popUp.TurnOn("You can't do the same action twice!");
+                    else _popUp.TurnOn("You can't do the same action twice!");
                     break;
 
                 case "medicine":
-                    if (!givenMeds)
+                    if (!_givenMeds)
                     {
                         if (day == 1)
                         {
-                            popUp.TurnOn(name + " is healthy, no need for medicine!");
+                            _popUp.TurnOn(name + " is healthy, no need for medicine!");
                             love -= 5;
                         }
                         else if (day < 5)
                         {
-                            popUp.TurnOn("You think " + name + " is feeling better now.");
+                            _popUp.TurnOn("You think " + name + " is feeling better now.");
                             love += 10;
                         }
-                        else popUp.TurnOn(name + " doesn't react.");
+                        else _popUp.TurnOn(name + " doesn't react.");
 
-                        givenMeds = true;
+                        _givenMeds = true;//action is done in all cases
                         actionsDone++;
                     }
-                    else popUp.TurnOn("You can't do the same action twice!");
+                    else _popUp.TurnOn("You can't do the same action twice!");
                     break;
 
                 case "pet":
-                    if (!beenPet)
+                    if (!_beenPet)
                     {
                         if (day == 1)
                         {
-                            popUp.TurnOn("You pet " + name + "! How cute!");
+                            _popUp.TurnOn("You pet " + name + "! How cute!");
                             love += 10;
                         }
                         else if (day == 2)
                         {
-                            popUp.TurnOn("You comfort " + name + ". Such a cuddly bunny.");
+                            _popUp.TurnOn("You comfort " + name + ". Such a cuddly bunny.");
                             love += 5;
                         }
                         else if (day < 5)
                         {
-                            popUp.TurnOn("The bunny is hurt... ");
+                            _popUp.TurnOn("The bunny is hurt... ");
                             love -= 5;
                         }
-                        actionsDone++;
-                        beenPet = true;
+                        actionsDone++;//action is done in all cases
+                        _beenPet = true;
                     }
-                    else popUp.TurnOn("You can't do the same action twice!");
+                    else _popUp.TurnOn("You can't do the same action twice!");
                     break;
             }
-            loveNumber.text = "Love: " + love + "%";
-            actionsNumber.text = "Actions left: " + (2 - actionsDone);
+            _loveNumber.text = "Love: " + love + "%"; //Disolay current love value
+            _actionsNumber.text = "Actions left: " + (2 - actionsDone); //How many actions can you still do?
 
         }
-        else popUp.TurnOn("No more actions left to do today! Click the pet carrier now.");
+        else _popUp.TurnOn("No more actions left to do today! Click the pet carrier now."); //Day end message.
     }
 
+    //------------------------------------------------------------------
+    //                        Day transition
+    //------------------------------------------------------------------
 
-
-    public void NextDay()
+    public void NextDay() //Next day transition
     {
-        if (day < 6)
+        if (day < 6) //day 6 is final
         {
             day++;
             actionsDone = 0;
-            givenSnack = false;
-            beenBrushed = false;
-            beenBathed = false;
-            givenMeds = false;
-            beenPet = false;
+            _givenSnack = false;
+            _beenBrushed = false;
+            _beenBathed = false;
+            _givenMeds = false;
+            _beenPet = false;
 
             switch (day)
             {
                 case 2:
-                    trueLove = 70;
+                    _trueLove = 70;
                     break;
                 case 3:
-                    trueLove = 60;
+                    _trueLove = 60;
                     break;
                 case 4:
-                    trueLove = 50;
+                    _trueLove = 50;
                     break;
                 case 5:
-                    trueLove = 20;
+                    _trueLove = 20;
                     break;
+                //day 6 is very different
             }
-            StartCoroutine(blackOut.FadeToBlack(true));
-            popUp.TurnOn("Day " + day);
-            dayNumber.text = "Day " + day;
-            love = trueLove;
-            loveNumber.text = "Love: " + love + "%";
-            actionsNumber.text = "Actions left: " + (2 - actionsDone);
+            StartCoroutine(_blackOut.FadeToBlack(true)); //fadeout
+            //change variables
+            _dayNumber.text = "Day " + day;
+            love = _trueLove;
+            _loveNumber.text = "Love: " + love + "%";
+            _actionsNumber.text = "Actions left: " + (2 - actionsDone);
         }
     }
 }
