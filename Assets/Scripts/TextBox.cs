@@ -52,4 +52,12 @@ public class TextBox : MonoBehaviour
         if (_messagesRead < _tutorialmessages.Count) _dialogueText.text = _tutorialmessages[_messagesRead]; //show the right message
         else _canvas.gameObject.SetActive(false); //if all messages read, turn off the box.
     }
+
+    public void Restart()
+    {
+        _canvas.gameObject.SetActive(true);
+        _messagesRead = 0;
+        _dialogueText.text = _tutorialmessages[_messagesRead];
+
+    }
 }

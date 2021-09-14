@@ -24,7 +24,7 @@ public class Bunny : MonoBehaviour
 
     public float love = 80; //player sees this change
     private float _trueLove = 80; //true love is true value applied in background
-    public int day = 1; //what day is it?
+    public int day = 5; //1; //what day is it?
 
     //Variables for checking if daily actions have been completed
     public int actionsDone = 0;
@@ -33,6 +33,8 @@ public class Bunny : MonoBehaviour
     private bool _beenBathed = false;
     private bool _givenMeds = false;
     private bool _beenPet = false;
+
+    private bool _isNextDay = false;
 
     //---------------------------- Sound ----------------------------//
     //Sound on action - talk
@@ -45,6 +47,13 @@ public class Bunny : MonoBehaviour
     //Sound on day transition
     private GameObject _audioTransitionObject;
     private List<AudioSource> _transitionAudio;
+
+    private GameObject _musicObject;
+    private List<AudioSource> _music;
+
+    //---------------------Day 6 transition---------------//
+    private GameObject _player;
+    private Day6 _day6;
 
 
     //------------------------------------------------------------
@@ -85,20 +94,41 @@ public class Bunny : MonoBehaviour
         _transitionAudio = new List<AudioSource>(4);
         _transitionAudio = _audioTransitionObject.GetComponents<AudioSource>().ToList();
 
+        _musicObject = GameObject.Find("Music");
+        _music = new List<AudioSource>(5);
+        _music = _musicObject.GetComponents<AudioSource>().ToList();
+
         _soundObject = GameObject.Find("Sound");
         _sound = _soundObject.GetComponent<AudioSource>();
+
+        _player = GameObject.Find("Player");
+        _day6 = _player.GetComponent<Day6>();
+        _player.SetActive(false);
         
     }
     private void Update()
     {
         if(day > 1)
         {
-            if (Input.GetKeyDown(KeyCode.Space)) //fade from black
+            if (Input.GetKeyDown(KeyCode.Space) && !_isNextDay ) //fade from black
             {
                 _blackOut.transitionText.gameObject.SetActive(false);
-                _transitionAudio[day - 2].Play(0);
+                if (day< 6) _transitionAudio[day - 2].Play(0);
                 StartCoroutine(_blackOut.FadeToBlack(false, 0.1f));
                 _popUp.TurnOn("Day " + day);
+                _isNextDay = true;
+
+                if (day > 2)
+                {
+                    _music[day - 3].Stop();
+                    _music[day - 2].Play(0);
+                }
+
+                if (day == 6)
+                {
+                    _player.SetActive(true);
+                    _day6.Starting(gameObject, _ui);
+                }
             }
         }        
     }
@@ -254,6 +284,7 @@ public class Bunny : MonoBehaviour
             _beenBathed = false;
             _givenMeds = false;
             _beenPet = false;
+            _isNextDay = false;
 
             switch (day) //set the real love value daily
             {            // player has 0 real impact on bunny's condition.

@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     //              Menu Options
     //-------------------------------------------------
 {
-    [SerializeField] private RabbitChoiceInfo _rabbit;
+    private RabbitChoiceInfo _rabbit;
 
     // Next screen
     public void PlayNextRoom()
@@ -20,7 +20,7 @@ public class MenuManager : MonoBehaviour
         if (scene == 1) 
         {
             _rabbit = FindObjectOfType<RabbitChoiceInfo>();
-            if (string.IsNullOrEmpty(_rabbit.bunnyName) == false) //is rabbit named?
+            if (_rabbit.IsRabbitNamed()) //is rabbit named?
             {
                 SceneManager.LoadScene(scene + 1); //you can move on
             }

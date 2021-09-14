@@ -550,7 +550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddb992eb6b97574d9ceaeb0cae5d47d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rabbit: {fileID: 1527791432}
 --- !u!1 &265996862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,7 +1865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bunny: {fileID: 3673848892641099578, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
   inputName: {fileID: 1405596272}
-  bunnyName: bunny.bunnyName
+  bunnyName: 
   furColour: 
 --- !u!1 &1580754378
 GameObject:
