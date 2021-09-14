@@ -10,10 +10,10 @@ public class HandFollowMouse : MonoBehaviour
     private Vector3 _mouseLocation;
     private float _mouseZ = 5f; //z default
 
-    [SerializeField] float _handZoomSpeed = 1;
+    [SerializeField] float _handZoomSpeed = 2;
 
-    private float _minZ = 3.5f;
-    private float _maxZ = 9.5f;
+    private float _minZ = 2.5f;
+    private float _maxZ = 15f;
     private float _damping = 7.5f;
 
     public bool isMoving = true;
