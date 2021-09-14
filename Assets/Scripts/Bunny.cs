@@ -35,9 +35,12 @@ public class Bunny : MonoBehaviour
     private bool _beenPet = false;
 
     //---------------------------- Sound ----------------------------//
-    //Sound on action
+    //Sound on action - talk
     private GameObject _audioActionObject;
     private List<AudioSource> _actionAudio;
+    // - action
+    private GameObject _soundObject;
+    private AudioSource _sound;
 
     //Sound on day transition
     private GameObject _audioTransitionObject;
@@ -82,6 +85,9 @@ public class Bunny : MonoBehaviour
         _transitionAudio = new List<AudioSource>(4);
         _transitionAudio = _audioTransitionObject.GetComponents<AudioSource>().ToList();
 
+        _soundObject = GameObject.Find("Sound");
+        _sound = _soundObject.GetComponent<AudioSource>();
+        
     }
     private void Update()
     {
@@ -149,6 +155,7 @@ public class Bunny : MonoBehaviour
                             love -= 5;
                         }
                         else _popUp.TurnOn(name + " doesn't react.");
+                        _sound.Play(0);
                         _actionAudio[1].Play(0);
                         actionsDone++; //action is done in all cases
                         _beenBrushed = true;
