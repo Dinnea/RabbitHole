@@ -38,7 +38,7 @@ public class ZoomInCamera : MonoBehaviour
     private float _sensitivityDistance = 10;
     private float _damping = 5;
 
-    private float _minFOV = 25;
+    private float _minFOV = 10;
     private float _maxFOV = 60;
 
     public bool isMoving; 
