@@ -56,7 +56,7 @@ public class TextBox : MonoBehaviour
     public void Restart()
     {
         _canvas.gameObject.SetActive(true);
-        _messagesRead = 0;
+        _messagesRead = 2;
         _dialogueText.text = _tutorialmessages[_messagesRead];
 
     }

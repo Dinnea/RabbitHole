@@ -55,6 +55,13 @@ public class Bunny : MonoBehaviour
     private GameObject _player;
     private Day6 _day6;
 
+    //-------------------- Bunny Models -----------------//
+    [SerializeField] GameObject _day1Model;
+    [SerializeField] GameObject _day2Model;
+    [SerializeField] GameObject _day3Model;
+    [SerializeField] GameObject _day4Model;
+    [SerializeField] GameObject _day5Model;
+
 
     //------------------------------------------------------------
     //                     Gathering UI elements etc
