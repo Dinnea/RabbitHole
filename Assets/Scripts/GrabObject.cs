@@ -98,9 +98,9 @@ public class GrabObject : MonoBehaviour
             grabbable.ResetPosition(); //placed at its original place 
             if (!doneAction) _popUpText.TurnOn("Dropped " + heldObject.name); //if dropped when NOT acting, show popup (else Bunny.cs shows popups)
             heldObject = null; //nothing is held
-            _pointing.SetActive(true);
-            _grabbing.SetActive(false);
         }
+        _pointing.SetActive(true);
+        _grabbing.SetActive(false);
 
         _hand.isMoving = true; //unfreeze the hand movement
         _mainCamera.isMoving = true; //unfreeze the camera

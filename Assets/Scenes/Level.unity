@@ -4331,6 +4331,18 @@ PrefabInstance:
       value: snack
       objectReference: {fileID: 0}
     - target: {fileID: 4204945805258964684, guid: 3dbf260eae7052640bef25208266634b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204945805258964684, guid: 3dbf260eae7052640bef25208266634b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204945805258964684, guid: 3dbf260eae7052640bef25208266634b, type: 3}
+      propertyPath: m_Size.z
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204945805258964684, guid: 3dbf260eae7052640bef25208266634b, type: 3}
       propertyPath: m_Center.x
       value: 0
       objectReference: {fileID: 0}
@@ -4424,7 +4436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1123632595}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.37, z: 0.49}
+  m_LocalPosition: {x: 0, y: -0.28, z: 0.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1903911136}
