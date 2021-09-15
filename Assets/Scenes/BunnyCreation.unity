@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1508592927}
         m_TargetAssemblyTypeName: RabbitChoiceEvents, Assembly-CSharp
         m_MethodName: FinalChoice
         m_Mode: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1469816367}
         m_TargetAssemblyTypeName: RabbitChoiceEvents, Assembly-CSharp
         m_MethodName: FinalChoice
         m_Mode: 1
@@ -229,7 +229,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 517041924}
         m_TargetAssemblyTypeName: RabbitChoiceEvents, Assembly-CSharp
         m_MethodName: FinalChoice
         m_Mode: 1
@@ -241,7 +241,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1693720170}
         m_TargetAssemblyTypeName: RabbitChoiceEvents, Assembly-CSharp
         m_MethodName: FinalChoice
         m_Mode: 1
@@ -2077,7 +2077,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ade754e4953eff4eb14fc49ffeffa02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bunny: {fileID: 3673848892641099578, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+  _bunnyWhite: {fileID: 3673848892641099578, guid: eb3a3b6ea0ca0d24b88a6e4267d5ef2c, type: 3}
+  _bunnyBrown: {fileID: 3673848892641099578, guid: d2b5ecec9fad7d942a411f3cf55fe35f, type: 3}
+  _bunnyGray: {fileID: 3673848892641099578, guid: a0280514a11a883489fa85ffbfba3801, type: 3}
+  _bunnyBlack: {fileID: 3673848892641099578, guid: 19e4c7e4b663c2b4abfddc705be1dd6e, type: 3}
   inputName: {fileID: 1405596272}
   bunnyName: 
   furColour: 

@@ -68,6 +68,11 @@ public class Bunny : MonoBehaviour
     //--------------------------------------------------------
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
         _info = GameObject.Find("PlayerRabbitInfo");
         _rabbitInfo = _info.GetComponent<RabbitChoiceInfo>();
 
@@ -82,9 +87,7 @@ public class Bunny : MonoBehaviour
 
         _actionsNumber = GameObject.Find("actions").GetComponent<TextMeshProUGUI>();
         _actionsNumber.text += 2 - actionsDone;
-    }
-    private void Start()
-    {
+
         name = _rabbitInfo.bunnyName;  //rename object according to its name
         _ui = GameObject.Find("UI");
 
