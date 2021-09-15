@@ -304,15 +304,23 @@ public class Bunny : MonoBehaviour
             switch (day) //set the real love value daily
             {            // player has 0 real impact on bunny's condition.
                 case 2:
+                    _day1Model.SetActive(false);
+                    _day2Model.SetActive(true);
                     _trueLove = 70;
                     break;
                 case 3:
+                    _day2Model.SetActive(false);
+                    _day3Model.SetActive(true);
                     _trueLove = 60;
                     break;
                 case 4:
+                    _day3Model.SetActive(false);
+                    _day4Model.SetActive(true);
                     _trueLove = 50;
                     break;
                 case 5:
+                    _day4Model.SetActive(false);
+                    _day5Model.SetActive(true);
                     _trueLove = 20;
                     break;
                 //day 6 is very different

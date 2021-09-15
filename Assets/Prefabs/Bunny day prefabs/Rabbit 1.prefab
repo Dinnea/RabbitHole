@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   love: 80
   day: 1
-  actionsDone: 0
+  actionsDone: 2
   _day1Model: {fileID: 2029539226779569012}
   _day2Model: {fileID: 3135088861666529990}
   _day3Model: {fileID: 5496221698275342797}
@@ -267,6 +267,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3673848892641099577}
     m_Modifications:
+    - target: {fileID: 264346883120233563, guid: 14cd50c3bced3674ab32e139d908464b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 125db30b8cec38948a2377b4487359cf, type: 2}
     - target: {fileID: 966617632943778337, guid: 14cd50c3bced3674ab32e139d908464b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -326,7 +330,7 @@ PrefabInstance:
     - target: {fileID: 8174197748357025046, guid: 14cd50c3bced3674ab32e139d908464b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 15bb8eb2502af774c94f44abb196c0bb, type: 2}
+      objectReference: {fileID: 2100000, guid: fe835d44b1de9984aa651d3d3ae02c61, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd50c3bced3674ab32e139d908464b, type: 3}
 --- !u!1 &2029539226779569012 stripped
