@@ -28,6 +28,11 @@ public class MenuManager : MonoBehaviour
         }
         else SceneManager.LoadScene(scene + 1); //if not scene with rabbit to be named, just move on
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
  
     public void QuitGame()
     {

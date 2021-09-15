@@ -19,19 +19,6 @@ public class Blackout : MonoBehaviour
         StartCoroutine(FadeToBlack(false));
     }
 
-    private void Update()
-    {
-        /*
-        if(objectColour.a == 1)
-        {           
-             
-        } 
-        
-        if(objectColour.a == 0)
-        {
-            
-        }*/
-    }
     public IEnumerator FadeToBlack(bool fade = true, float fadeSpeed = 5)
     {
         objectColour = blackOutScreen.GetComponent<Image>().color; //whats the object's colour right now?

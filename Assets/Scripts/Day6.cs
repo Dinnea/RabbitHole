@@ -24,19 +24,24 @@ public class Day6 : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !_hasTurned)
-        {
+        {/*
             _hand.SetActive(false);
             _camera1.GetComponent<AudioListener>().enabled = false;
             _camera1.enabled = false;
 
             _camera2.enabled = true;
-            _camera2.GetComponent<AudioListener>().enabled = true;
+            _camera2.GetComponent<AudioListener>().enabled = true;*/
 
             StartCoroutine(gameObject.GetComponent<RotatePlayer>().Rotate(new Vector3 (0, 90, 0), 5));
             _popUpText.text = "Press W or UP to move forwards. Move your mouse to look around.";
             _hasTurned = true;
             _mouseLook = GetComponentInChildren<MouseLook>();
             _mouseLook.isMovingFreely = true;
+
+        }
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            _popUp.SetActive(false);
         }
     }
 

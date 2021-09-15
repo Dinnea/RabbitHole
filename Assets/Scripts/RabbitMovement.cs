@@ -13,6 +13,6 @@ public class RabbitMovement : MonoBehaviour
     private void Awake()
     {
         transform.position = new Vector3(-0.85f, -1.26f, 5.68f);
-        transform.rotation = Quaternion.identity;
+        transform.rotation = Quaternion.Euler(0, -135, 0);
     }
 }
