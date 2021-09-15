@@ -24,6 +24,11 @@ public class GrabObject : MonoBehaviour
     [SerializeField] Canvas _popup;
     private PopUpTextLevel _popUpText;
 
+    //hand models
+    [SerializeField] GameObject _pointing;
+    [SerializeField] GameObject _grabbing;
+    [SerializeField] GameObject _petting;
+
 
     private void Start()
     {
@@ -46,6 +51,8 @@ public class GrabObject : MonoBehaviour
             else if (!_isHolding && isRabbit && !_isActing) //if I am not holding anything and, there is a rabbit and am not yet acting... Pet the rabbit!
             {
                 //Pet
+                _petting.SetActive(true);
+                _pointing.SetActive(false);
                 bunny.TakeCare("pet");
                 _hand.isMoving = false;
                 _mainCamera.isMoving = false;
@@ -59,14 +66,14 @@ public class GrabObject : MonoBehaviour
     //---------------------------------------------------------------
     void PickUp()
     {
-        
-        
         if (_hit)
         {
             bunny = FindObjectOfType<Bunny>();
             Debug.Log("Hit " + _hitInfo.transform.gameObject.name);
             if (_hitInfo.transform.CompareTag("Grabbable")) //Can you pick up the object?
             {
+                _pointing.SetActive(false);
+                _grabbing.SetActive(true);
                 heldObject = _hitInfo.collider.gameObject; //object being picked up
                 heldObject.transform.SetParent(_pickUpSlot); //placed in pick up slot
                 heldObject.transform.localPosition = Vector3.zero; //located at pick up slot
@@ -90,7 +97,9 @@ public class GrabObject : MonoBehaviour
             heldObject.transform.SetParent(null); //no longer held!
             grabbable.ResetPosition(); //placed at its original place 
             if (!doneAction) _popUpText.TurnOn("Dropped " + heldObject.name); //if dropped when NOT acting, show popup (else Bunny.cs shows popups)
-            heldObject = null; //nothing is held        
+            heldObject = null; //nothing is held
+            _pointing.SetActive(true);
+            _grabbing.SetActive(false);
         }
 
         _hand.isMoving = true; //unfreeze the hand movement
@@ -112,5 +121,6 @@ public class GrabObject : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Drop(doneAction);
+        _petting.SetActive(false);
     }
 }
